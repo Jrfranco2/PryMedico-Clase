@@ -10,11 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -35,10 +33,12 @@ public class Medicamento implements Serializable {
 	
 	@Column(name = "VIAADMINISTRACION")
 	@Size(max = 255)
+	@NotEmpty 
 	private String viaAdministracion;
 	
 	@Column(name = "NOMBRECOMERCIAL")
-	@Size(max = 255)
+	@Size(max = 15)
+	@NotEmpty 
 	private String nombreComercial;
 	
 	@Column(name = "PRECIO")
@@ -46,6 +46,7 @@ public class Medicamento implements Serializable {
 	
 	@Column(name = "CONCENTRACION")
 	@Size(max = 255)
+	@NotEmpty 
 	private String concentracion;
 	
 	@OneToMany(mappedBy="medicamento", fetch=FetchType.LAZY)

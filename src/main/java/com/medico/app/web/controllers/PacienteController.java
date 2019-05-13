@@ -1,6 +1,5 @@
 package com.medico.app.web.controllers;
 
-import com.medico.app.web.models.dao.IPacienteDAO;
 import com.medico.app.web.models.entities.Paciente;
 import com.medico.app.web.models.services.IPacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Controller
@@ -30,9 +29,10 @@ public class PacienteController {
     }
 
     @PostMapping(value="/save" )
-    public String save(Paciente paciente,Model model){
+    public String save(Paciente paciente,Model model,RedirectAttributes message){
         try{
             service.save(paciente);
+            message.addFlashAttribute("success","El paciente se guardo exitosamente");
         }catch (Exception ex){
             model.addAttribute("error: ",ex.toString());
         }
